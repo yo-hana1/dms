@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../assets/logowkp.jpg';
 
 const terbilang = (angka) => {
   const bilne = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];
@@ -55,7 +56,7 @@ const KwitansiPreview = ({ item, invoices }) => {
     }}>
       {/* Letterhead (Kop) */}
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', borderBottom: '4px double #000', paddingBottom: '10px' }}>
-        <img src="/logo.jpg" alt="PT. WKP Logo" style={{ width: '60px', height: 'auto', marginRight: '15px' }} />
+        <img src={logo} alt="PT. WKP Logo" style={{ width: '60px', height: 'auto', marginRight: '15px' }} />
         <div style={{ flex: 1 }}>
           <h1 style={{ fontSize: '18px', fontWeight: 'bold', margin: '0' }}>PT. WIJAYA KUSUMA PERDANA</h1>
           <p style={{ margin: '2px 0 0 0', fontSize: '10px', color: '#333', fontFamily: 'sans-serif' }}>

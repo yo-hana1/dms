@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, Eye, Printer, X } from 'lucide-react';
 import { useAppData } from '../context/AppDataContext';
+import logo from '../assets/logowkp.jpg';
 
 const Approval = () => {
   const { purchaseOrders, approvePO, rejectPO, projects, payments, approvePayment, rejectPayment, invoices } = useAppData();
@@ -147,7 +148,7 @@ const Approval = () => {
               }}>
                 {/* Letterhead (Kop) */}
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', borderBottom: '4px double #333', paddingBottom: '20px' }}>
-                  <img src="/logo.jpg" alt="PT. WKP Logo" style={{ width: '80px', height: 'auto', marginRight: '20px' }} />
+                  <img src={logo} alt="PT. WKP Logo" style={{ width: '80px', height: 'auto', marginRight: '20px' }} />
                   <div style={{ flex: 1 }}>
                     <h1 style={{ fontSize: '22px', fontWeight: 'bold', margin: '0', letterSpacing: '1px' }}>PT. WIJAYA KUSUMA PERDANA</h1>
                     <p style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#555', fontFamily: 'sans-serif' }}>

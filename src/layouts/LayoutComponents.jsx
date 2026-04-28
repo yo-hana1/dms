@@ -18,6 +18,7 @@ import {
   Inbox
 } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import logo from '../assets/logowkp.jpg';
 import { useAppData } from '../context/AppDataContext';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
@@ -57,7 +58,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         borderBottom: '1px solid #4b545c',
         height: '60px'
       }}>
-        <img src="/logo.jpg" alt="Logo WKP" style={{ height: '35px', width: 'auto', borderRadius: '4px' }} />
+        <img src={logo} alt="Logo WKP" style={{ height: '35px', width: 'auto', borderRadius: '4px' }} />
         {!isCollapsed && (
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
             <span style={{ fontWeight: 'bold', fontSize: '1.1rem', color: 'white' }}>PT. WKP</span>
