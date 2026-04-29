@@ -12,6 +12,7 @@ import Laporan from './pages/Laporan';
 import Approval from './pages/Approval';
 import Restore from './pages/Restore';
 import TerimaBarang from './pages/TerimaBarang';
+import MasterUser from './pages/MasterUser';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           {/* Admin Routes */}
           <Route path="/" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="master-user" element={<MasterUser />} />
             <Route path="proyek" element={<DataProyek />} />
             <Route path="serah-terima" element={<SerahTerima />} />
             <Route path="po" element={<PurchaseOrder />} />

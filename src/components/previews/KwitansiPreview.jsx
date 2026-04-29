@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../../assets/logowkp.jpg';
+
+const logo = '/logowkp.jpg';
 
 const terbilang = (angka) => {
   const bilne = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];

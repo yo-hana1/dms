@@ -11,7 +11,7 @@ import KwitansiPreview from '../components/previews/KwitansiPreview';
 
 const Restore = () => {
   const { 
-    projects, appointments, purchaseOrders, invoices, payments,
+    projects, appointments, purchaseOrders, invoices, payments, masterUsers,
     restoreItem, softDelete 
   } = useAppData();
 
@@ -24,6 +24,7 @@ const Restore = () => {
   const deletedPOs = purchaseOrders.filter(p => p.isDeleted);
   const deletedInvoices = invoices.filter(i => i.isDeleted);
   const deletedPayments = payments.filter(p => p.isDeleted);
+  const deletedMasterUsers = masterUsers.filter(u => u.isDeleted);
 
   const handlePreview = (item, type) => {
     setActiveItem(item);
@@ -111,7 +112,7 @@ const Restore = () => {
     }
   };
 
-  const totalDeleted = deletedProjects.length + deletedST.length + deletedPOs.length + deletedInvoices.length + deletedPayments.length;
+  const totalDeleted = deletedProjects.length + deletedST.length + deletedPOs.length + deletedInvoices.length + deletedPayments.length + deletedMasterUsers.length;
 
   return (
     <div className="content-body">
@@ -135,6 +136,7 @@ const Restore = () => {
           {renderTable(deletedPOs, 'PO', 'Purchase Order')}
           {renderTable(deletedInvoices, 'Invoice', 'Invoice')}
           {renderTable(deletedPayments, 'Pembayaran', 'Pembayaran')}
+          {renderTable(deletedMasterUsers.map(u => ({ ...u, code: `${u.type}: ${u.name}` })), 'MasterUser', 'Master User')}
         </>
       )}
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../../assets/logowkp.jpg';
+
+const logo = '/logowkp.jpg';
 
 const LPJPreview = ({ item, appointments, projects }) => {
   if (!item) return null;

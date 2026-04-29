@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, Eye, Printer, X } from 'lucide-react';
 import { useAppData } from '../context/AppDataContext';
-import logo from '../assets/logowkp.jpg';
+
+const logo = '/logowkp.jpg';
 
 const Approval = () => {
   const { purchaseOrders, approvePO, rejectPO, projects, payments, approvePayment, rejectPayment, invoices } = useAppData();

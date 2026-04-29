@@ -1,5 +1,7 @@
 import React from 'react';
 
+const logo = '/logowkp.jpg';
+
 const ProjectPreview = ({ item }) => {
   if (!item) return null;
 
@@ -16,7 +18,7 @@ const ProjectPreview = ({ item }) => {
     }}>
       {/* Letterhead (Kop) */}
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', borderBottom: '4px double #333', paddingBottom: '20px' }}>
-        <img src="/logo.jpg" alt="PT. WKP Logo" style={{ width: '80px', height: 'auto', marginRight: '20px' }} />
+        <img src={logo} alt="PT. WKP Logo" style={{ width: '80px', height: 'auto', marginRight: '20px' }} />
         <div style={{ flex: 1 }}>
           <h1 style={{ fontSize: '22px', fontWeight: 'bold', margin: '0', letterSpacing: '1px' }}>PT. WIJAYA KUSUMA PERDANA</h1>
           <p style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#555' }}>

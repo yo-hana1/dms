@@ -119,6 +119,29 @@ export const AppDataProvider = ({ children }) => {
     ];
   });
 
+  const [masterUsers, setMasterUsers] = useState(() => {
+    const saved = localStorage.getItem('dms_master_users');
+    return saved ? JSON.parse(saved) : [
+      // Internal
+      { id: 1, type: 'Internal', name: 'Budi Wirawan', position: 'Direktur', company: 'PT. WKP', contact: '-', status: 'Aktif' },
+      { id: 2, type: 'Internal', name: 'Anto Suliso', position: 'Manajer', company: 'PT. WKP', contact: '-', status: 'Aktif' },
+      { id: 3, type: 'Internal', name: 'Dedi Purnomo', position: 'Konsultan', company: 'PT. WKP', contact: '-', status: 'Aktif' },
+      { id: 4, type: 'Internal', name: 'System Administrator', position: 'Admin', company: 'PT. WKP', contact: '-', status: 'Aktif' },
+      // Main Contractor
+      { id: 5, type: 'Main Contractor', name: '-', position: '-', company: 'PT. Bangun Jaya', contact: '-', status: 'Aktif' },
+      { id: 6, type: 'Main Contractor', name: '-', position: '-', company: 'PT Wijaya Kusuma Perdana', contact: '-', status: 'Aktif' },
+      { id: 7, type: 'Main Contractor', name: '-', position: '-', company: 'PT. Infrastruktur Utama', contact: '-', status: 'Aktif' },
+      // Sub Contractor
+      { id: 8, type: 'Sub Contractor', name: '-', position: '-', company: 'CV. Mandiri Teknik', contact: '-', status: 'Aktif' },
+      { id: 9, type: 'Sub Contractor', name: '-', position: '-', company: 'CV. Karya Mandiri', contact: '-', status: 'Aktif' },
+      // Vendor
+      { id: 10, type: 'Vendor', name: '-', position: '-', company: 'Mandiri Steel', contact: '-', status: 'Aktif' },
+      { id: 11, type: 'Vendor', name: '-', position: '-', company: 'Semen Nusantara', contact: '-', status: 'Aktif' },
+      { id: 12, type: 'Vendor', name: '-', position: '-', company: 'CV. Terang Sejahtera', contact: '-', status: 'Aktif' },
+      { id: 13, type: 'Vendor', name: '-', position: '-', company: 'PT. Cerah Merona', contact: '-', status: 'Aktif' },
+    ];
+  });
+
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -129,7 +152,8 @@ export const AppDataProvider = ({ children }) => {
     localStorage.setItem('dms_payments', JSON.stringify(payments));
     localStorage.setItem('dms_terimabarang', JSON.stringify(terimaBarang));
     localStorage.setItem('dms_lpj', JSON.stringify(lpjReports));
-  }, [projects, appointments, purchaseOrders, invoices, payments, terimaBarang, lpjReports]);
+    localStorage.setItem('dms_master_users', JSON.stringify(masterUsers));
+  }, [projects, appointments, purchaseOrders, invoices, payments, terimaBarang, lpjReports, masterUsers]);
 
   // Generators
   const generateProjectCode = (name) => {
@@ -224,6 +248,21 @@ export const AppDataProvider = ({ children }) => {
     setPurchaseOrders([...purchaseOrders, newPO]);
   };
 
+  const addMasterUser = (data) => {
+    const newUser = {
+      ...data,
+      id: Date.now(),
+      status: data.status || 'Aktif',
+      createdAt: new Date().toISOString()
+    };
+    setMasterUsers([...masterUsers, newUser]);
+    return newUser;
+  };
+
+  const updateMasterUser = (id, data) => {
+    setMasterUsers(masterUsers.map(u => u.id === id ? { ...u, ...data } : u));
+  };
+
   const approvePO = (id) => {
     setPurchaseOrders(purchaseOrders.map(po => po.id === id ? { ...po, status: 'Approved' } : po));
   };
@@ -270,6 +309,9 @@ export const AppDataProvider = ({ children }) => {
       case 'LPJ':
         setLpjReports(prev => prev.map(l => l.id === id ? { ...l, isDeleted: true, deletedAt } : l));
         break;
+      case 'MasterUser':
+        setMasterUsers(prev => prev.map(u => u.id === id ? { ...u, isDeleted: true, deletedAt } : u));
+        break;
       default: break;
     }
   };
@@ -296,6 +338,9 @@ export const AppDataProvider = ({ children }) => {
         break;
       case 'LPJ':
         setLpjReports(prev => prev.map(l => l.id === id ? { ...l, isDeleted: false, deletedAt: null } : l));
+        break;
+      case 'MasterUser':
+        setMasterUsers(prev => prev.map(u => u.id === id ? { ...u, isDeleted: false, deletedAt: null } : u));
         break;
       default: break;
     }
@@ -371,7 +416,8 @@ export const AppDataProvider = ({ children }) => {
       generateTBCode,
       generateLPJCode,
       searchTerm, setSearchTerm,
-      softDelete, restoreItem
+      softDelete, restoreItem,
+      masterUsers, addMasterUser, updateMasterUser
     }}>
       {children}
     </AppDataContext.Provider>

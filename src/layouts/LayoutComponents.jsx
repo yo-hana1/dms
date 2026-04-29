@@ -1,12 +1,12 @@
-import { 
-  LayoutDashboard, 
-  Briefcase, 
-  Handshake, 
-  FileText, 
-  FileCheck, 
-  CreditCard, 
-  PieChart, 
-  CheckSquare, 
+import {
+  LayoutDashboard,
+  Briefcase,
+  Handshake,
+  FileText,
+  FileCheck,
+  CreditCard,
+  PieChart,
+  CheckSquare,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -15,15 +15,18 @@ import {
   Search,
   User,
   RefreshCw,
-  Inbox
+  Inbox,
+  Users
 } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import logo from '../assets/logowkp.jpg';
 import { useAppData } from '../context/AppDataContext';
+
+const logo = '/dms/logowkp.jpg';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
+    { name: 'Master User', icon: Users, path: '/master-user' },
     { name: 'Data Proyek', icon: Briefcase, path: '/proyek' },
     { name: 'Serah Terima', icon: Handshake, path: '/serah-terima' },
     { name: 'Purchase Order', icon: FileText, path: '/po' },
@@ -50,66 +53,90 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         flexShrink: 0,
         overflowY: 'auto'
       }}>
-      <div className="sidebar-header" style={{
-        padding: '20px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        borderBottom: '1px solid #4b545c',
-        height: '60px'
-      }}>
-        <img src={logo} alt="Logo WKP" style={{ height: '35px', width: 'auto', borderRadius: '4px' }} />
-        {!isCollapsed && (
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
-            <span style={{ fontWeight: 'bold', fontSize: '1.1rem', color: 'white' }}>PT. WKP</span>
-            <span style={{ fontWeight: '300', fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)' }}>Wijaya Kusuma Perdana</span>
-          </div>
-        )}
-      </div>
+        <div className="sidebar-header" style={{
+          padding: '0 15px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          borderBottom: '1px solid #4b545c',
+          height: '70px'
+        }}>
+          <img
+            src={logo}
+            alt="Logo WKP"
+            style={{
+              height: isCollapsed ? '30px' : '42px',
+              width: 'auto',
+              borderRadius: '4px',
+              transition: 'var(--transition)'
+            }}
+          />
+          {!isCollapsed && (
+            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2', overflow: 'hidden' }}>
+              <span style={{
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                color: 'white',
+                whiteSpace: 'nowrap'
+              }}>
+                PT. WKP
+              </span>
+              <span style={{
+                fontWeight: '400',
+                fontSize: '0.75rem',
+                color: 'rgba(255,255,255,0.8)',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis'
+              }}>
+                Wijaya Kusuma Perdana
+              </span>
+            </div>
+          )}
+        </div>
 
-      <nav style={{ flex: 1, padding: '10px 0' }}>
-        <ul>
-          {menuItems.map((item) => (
-            <li key={item.name} style={{ margin: '4px 8px' }}>
-              <NavLink 
-                to={item.path}
-                style={({ isActive }) => ({
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '12px 15px',
-                  borderRadius: '4px',
-                  color: isActive ? 'white' : 'var(--sidebar-text)',
-                  backgroundColor: isActive ? 'var(--primary)' : 'transparent',
-                  transition: '0.2s'
-                })}
-              >
-                <item.icon size={20} />
-                {!isCollapsed && <span style={{ marginLeft: '12px' }}>{item.name}</span>}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <nav style={{ flex: 1, padding: '10px 0' }}>
+          <ul>
+            {menuItems.map((item) => (
+              <li key={item.name} style={{ margin: '4px 8px' }}>
+                <NavLink
+                  to={item.path}
+                  style={({ isActive }) => ({
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '12px 15px',
+                    borderRadius: '4px',
+                    color: isActive ? 'white' : 'var(--sidebar-text)',
+                    backgroundColor: isActive ? 'var(--primary)' : 'transparent',
+                    transition: '0.2s'
+                  })}
+                >
+                  <item.icon size={20} />
+                  {!isCollapsed && <span style={{ marginLeft: '12px' }}>{item.name}</span>}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      <div style={{ padding: '15px', borderTop: '1px solid #4b545c' }}>
-        <button 
-          onClick={() => {}} 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            width: '100%', 
-            background: 'transparent', 
-            border: 'none', 
-            color: 'var(--sidebar-text)',
-            padding: '10px'
-          }}
-        >
-          <LogOut size={20} />
-          {!isCollapsed && <span style={{ marginLeft: '12px' }}>Logout</span>}
-        </button>
-      </div>
-    </aside>
-    <div className={`sidebar-overlay ${!isCollapsed ? 'show' : ''}`} onClick={() => setIsCollapsed(true)}></div>
+        <div style={{ padding: '15px', borderTop: '1px solid #4b545c' }}>
+          <button
+            onClick={() => { }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              width: '100%',
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--sidebar-text)',
+              padding: '10px'
+            }}
+          >
+            <LogOut size={20} />
+            {!isCollapsed && <span style={{ marginLeft: '12px' }}>Logout</span>}
+          </button>
+        </div>
+      </aside>
+      <div className={`sidebar-overlay ${!isCollapsed ? 'show' : ''}`} onClick={() => setIsCollapsed(true)}></div>
     </>
   );
 };
@@ -136,17 +163,17 @@ const Navbar = ({ toggleSidebar }) => {
         </button>
         <div className="search-input-container" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
           <Search size={18} style={{ position: 'absolute', left: '10px', color: '#999' }} />
-          <input 
-            type="text" 
-            placeholder="Pencarian dokumen..." 
+          <input
+            type="text"
+            placeholder="Pencarian dokumen..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ 
-              padding: '6px 10px 6px 35px', 
-              borderRadius: '20px', 
+            style={{
+              padding: '6px 10px 6px 35px',
+              borderRadius: '20px',
               border: '1px solid #ddd',
               width: '250px'
-            }} 
+            }}
           />
         </div>
       </div>
@@ -154,15 +181,15 @@ const Navbar = ({ toggleSidebar }) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
         <div style={{ position: 'relative' }}>
           <Bell size={20} />
-          <span style={{ 
-            position: 'absolute', 
-            top: '-5px', 
-            right: '-5px', 
-            backgroundColor: 'var(--primary)', 
-            color: 'white', 
-            fontSize: '10px', 
-            padding: '1px 4px', 
-            borderRadius: '50%' 
+          <span style={{
+            position: 'absolute',
+            top: '-5px',
+            right: '-5px',
+            backgroundColor: 'var(--primary)',
+            color: 'white',
+            fontSize: '10px',
+            padding: '1px 4px',
+            borderRadius: '50%'
           }}>3</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -171,7 +198,7 @@ const Navbar = ({ toggleSidebar }) => {
             <div style={{ fontSize: '12px', color: '#777' }}>Administrator</div>
           </div>
           <div style={{ width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-             <User size={20} style={{ margin: 'auto' }} />
+            <User size={20} style={{ margin: 'auto' }} />
           </div>
         </div>
       </div>

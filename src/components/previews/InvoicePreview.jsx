@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatTerbilang } from '../../utils/terbilang';
-import logo from '../../assets/logowkp.jpg';
+
+const logo = '/logowkp.jpg';
 
 const InvoicePreview = ({ item, purchaseOrders }) => {
   if (!item) return null;
